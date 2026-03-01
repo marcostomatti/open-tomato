@@ -2,45 +2,65 @@
 
 ## Required Tooling
 
-The following tools must be installed and available on `PATH` before executing any task in PLAN.md.
+All tools listed here must be installed and available on `PATH` before any task in PLAN.md is executed.
 
 ### Node.js
 
-- Version: 20.x LTS or later (20 is the minimum for Electron 30+ compatibility)
-- Verify: `node --version`
-- Install via: `nvm`, `fnm`, or direct download from nodejs.org
+- Minimum version: 20.x LTS
+- Rationale: Node 20 is the minimum for Electron 30+ compatibility and for npm 10 workspace features
+- Verify with: `node --version`
+- Recommended installation method: `nvm` or `fnm` for version management
 
 ### npm
 
-- Version: 10.x or later (required for workspaces `--include=workspace-root` flag support)
-- Verify: `npm --version`
-- Bundled with Node.js 20; no separate install needed
-
-### TypeScript
-
-- Installed as a root dev dependency via `npm install` after `package.json` is created
-- No global TypeScript installation is required or assumed
-- The `tsc` binary is accessed via `npx tsc` or npm scripts
+- Minimum version: 10.x
+- Rationale: npm 10 introduced `--include=workspace-root` and workspace query improvements relied on in this setup
+- Verify with: `npm --version`
+- npm 10 is bundled with Node.js 20; no separate installation is required
 
 ### Git
 
-- Version: 2.x or later
-- Verify: `git --version`
-- The repository must be initialized (`git init`) before the first commit
+- Minimum version: 2.x
+- Verify with: `git --version`
+- The repository root must be a git working directory before the first task is executed
+- On Windows, configure `git config core.autocrlf false` globally or per-repository to prevent LF-to-CRLF conversion that would conflict with the `.editorconfig` and `.prettierrc` line ending settings
 
-## Environment Assumptions
+### TypeScript
 
-- The working directory is the repository root throughout all tasks
+- Installed as a root workspace dev dependency via `npm install` after `package.json` is authored; no global installation is assumed or required
+- All `tsc` invocations use `npx tsc` or npm script delegates
+
+## Environment Configuration
+
 - No environment variables are required for scaffolding tasks
-- No external services, credentials, or network access are required at this stage
-- Line endings on the host machine should be set to LF or the developer must configure `git` with `core.autocrlf = false` (Windows) to avoid `.editorconfig` and `.gitignore` conflicts
+- No external services, APIs, or credentials are required at this stage
+- No CI secrets are needed to create the `.github/workflows/` directory stub
 
-## Recommended Editor Setup
+## Operating System Notes
 
-- An EditorConfig-compatible editor (VS Code with EditorConfig extension, or JetBrains IDEs with built-in support) to validate `.editorconfig` behavior on save
-- ESLint and Prettier editor extensions for early feedback during file creation
+### macOS
 
-## Notes
+- No additional setup required beyond the tooling above
+- `.DS_Store` exclusion in `.gitignore` is relevant here and is included in the plan
 
-- Electron is not installed at this stage. It becomes a dependency in a subsequent task when the main process is wired up.
-- No CI secrets or GitHub tokens are required to create the `.github/workflows/` directory stub.
+### Windows
+
+- Ensure `core.autocrlf` is set to `false` in git configuration before the first commit to avoid line ending conflicts
+- Verify that the shell used to run `npm` commands (PowerShell, Git Bash, or WSL2) resolves `node` and `npm` from the same installation
+- WSL2 is a supported development environment and avoids most Windows-specific path and line ending issues
+
+### Linux
+
+- `libsecret` must be installed on the host for `keytar` to function in later development stages; it is not required for scaffolding tasks
+- Verify with: `pkg-config --libs libsecret-1` (Debian/Ubuntu: `sudo apt install libsecret-1-dev`)
+
+## Editor Setup (Recommended)
+
+- An EditorConfig-compatible editor is recommended to validate `.editorconfig` behavior during file authoring (VS Code with the EditorConfig extension, or any JetBrains IDE with built-in EditorConfig support)
+- ESLint and Prettier editor extensions should be configured to use the workspace-local installations, not globally installed versions, to avoid version mismatch
+
+## Not Required at This Stage
+
+- Electron is not installed during scaffolding; it becomes a dependency when the main process entry point is wired up in a subsequent task
+- No signing certificates, notarization credentials, or `electron-builder` configuration is needed until the packaging stage
+- No GitHub Actions secrets or tokens are needed to create the workflows directory placeholder
