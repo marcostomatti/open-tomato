@@ -12,4 +12,3 @@ After completing the task, append any new findings to `./progress.txt` that matc
 When all tasks are complete:
 * Migrate broadly useful findings from `progress.txt` into the appropriate section of `AGENTS.md`
 * Remove entries from `progress.txt` that are now covered by `AGENTS.md` or are no longer relevant
-* Run `touch DONE`

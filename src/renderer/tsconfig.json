@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "strict": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": [],
+    "paths": {
+      "@shared/types": ["../shared/types/index.ts"],
+      "@shared/ipc": ["../shared/ipc/index.ts"]
+    }
+  },
+  "references": [{ "path": "../shared" }]
+}

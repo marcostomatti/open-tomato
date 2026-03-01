@@ -76,11 +76,11 @@ web_modules/
 
 # Next.js build output
 .next
-out
+out/
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+dist/
 
 # Gatsby files
 .cache/
@@ -146,3 +146,15 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 .DS_Store
+
+# Electron build output
+release/
+*.dmg
+*.exe
+*.AppImage
+
+# Local environment overrides
+*.local
+
+# Turborepo
+.turbo/
