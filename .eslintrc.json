@@ -1,0 +1,33 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": ["plugin:@typescript-eslint/recommended-type-checked"],
+  "parserOptions": {
+    "project": true,
+    "tsconfigRootDir": "."
+  },
+  "overrides": [
+    {
+      "files": ["src/main/**/*.ts", "src/main/**/*.tsx"],
+      "env": {
+        "node": true,
+        "browser": false
+      }
+    },
+    {
+      "files": ["src/renderer/**/*.ts", "src/renderer/**/*.tsx"],
+      "env": {
+        "browser": true,
+        "node": false
+      }
+    },
+    {
+      "files": ["src/preload/**/*.ts", "src/preload/**/*.tsx"],
+      "env": {
+        "node": true,
+        "browser": true
+      }
+    }
+  ]
+}
