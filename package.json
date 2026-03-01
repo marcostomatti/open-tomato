@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "dotenv": "^17.3.1"
+  },
+  "devDependencies": {
+    "@linear/sdk": "^76.0.0",
+    "@types/bun": "latest",
+    "@types/node": "^25.3.3",
+    "inquirer": "^13.3.0",
+    "typescript": "^5.9.3"
+  },
+  "name": "open-tomato",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "tasks": "bun scripts/tasks.ts",
+    "tasks:next": "bun scripts/pick-next-issue.ts"
+  }
+}
