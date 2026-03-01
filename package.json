@@ -18,5 +18,8 @@
     "inquirer": "^13.3.0",
     "prettier": "^3.3.3",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1"
   }
 }
